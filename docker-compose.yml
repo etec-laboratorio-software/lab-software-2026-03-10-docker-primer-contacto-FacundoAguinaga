@@ -1,0 +1,34 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_USER: chatuser
+      POSTGRES_PASSWORD: chatpassword
+      POSTGRES_DB: chatdb
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  backend:
+    build:
+      context: ./mi-chat-app/backend
+    environment:
+      - DATABASE_URL=postgresql://chatuser:chatpassword@db:5432/chatdb?schema=public
+      - JWT_SECRET=ESTA_ES_UNA_CLAVE_SECRETA_MUY_LARGA_Y_DIFICIL_DE_ADIVINAR_12345
+    depends_on:
+      - db
+
+  frontend:
+    build:
+      context: ./mi-chat-app/frontend
+      # Pass the VITE_ variables as build args if necessary, or let them fall back to relative URLs default
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+
+volumes:
+  pgdata:

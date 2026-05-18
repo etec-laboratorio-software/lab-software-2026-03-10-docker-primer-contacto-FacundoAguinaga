@@ -1,5 +1,5 @@
 // La URL base de tu API de backend
-const API_URL = 'http://10.56.182.58:3000/api/auth'; // Asegúrate que esta URL sea correcta para tu entorno
+const API_URL = import.meta.env.VITE_API_URL || '/api/auth'; // Asegúrate que esta URL sea proxy-eada en Nginx
 
 /**
  * Registra un nuevo usuario.
