@@ -23,9 +23,33 @@
 ## 📋 Prerrequisitos
 
 Antes de comenzar, asegúrate de tener instalado lo siguiente:
-* [Node.js](https://nodejs.org/) (v18 o superior)
-* `npm` (incluido con Node.js)
+* [Node.js](https://nodejs.org/) (v18 o superior, solo para instalación manual)
+* `npm` (incluido con Node.js, solo para instalación manual)
 * [Git](https://git-scm.com/)
+* [Docker](https://www.docker.com/) y Docker Compose (para la opción con Docker)
+
+---
+
+## 🐳 Ejecución con Docker (Recomendado)
+
+Esta es la forma más rápida de iniciar toda la aplicación (Base de Datos PostgreSQL, Backend y Frontend servido con Nginx) sin necesidad de configurar dependencias locales.
+
+### 1. Iniciar la aplicación
+Ejecuta el siguiente comando en la raíz del proyecto para construir y levantar todos los contenedores:
+```bash
+docker compose up -d --build
+```
+> 💡 **Nota:** En el primer arranque, la base de datos PostgreSQL tarda unos segundos en inicializarse. Si el contenedor del backend falla al intentar conectarse inicialmente, simplemente vuelve a ejecutar `docker compose up -d` una vez que la base de datos esté lista.
+
+### 2. Acceder a la aplicación
+Una vez levantados los contenedores, abre tu navegador y entra en:
+**http://localhost/**
+
+### 3. Detener la aplicación
+Para apagar todos los contenedores y liberar recursos:
+```bash
+docker compose down
+```
 
 ---
 
